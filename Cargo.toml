@@ -1,0 +1,25 @@
+[package]
+name = "peregrine"
+version = "0.0.0"
+edition = "2018"
+authors = ["J Wylie Cullick"]
+publish = false
+
+
+
+[dependencies]
+vulkano = { git = "https://github.com/vulkano-rs/vulkano.git", rev = "master" }
+vulkano-win = { git = "https://github.com/vulkano-rs/vulkano.git", rev = "master" }
+vulkano-shaders = { git = "https://github.com/vulkano-rs/vulkano.git", rev = "master" }
+cgmath = "0.17"
+gilrs = "0.7.2"
+image = "0.22"
+multiinput = "0.0.15"
+obj-rs = "0.5"
+png = "0.15.0"
+time = "0.1.38"
+tobj = "0.1.12"
+srtm = "0.1.1"
+shaderc = "0.6.2"
+notify = "4.0.15"
+winit = "0.22"
