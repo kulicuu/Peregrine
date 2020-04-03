@@ -26,7 +26,7 @@ use std::collections::HashMap;
 use vulkano_win::VkSurfaceBuild;
 use winit::window::{WindowBuilder, Window};
 use winit::event_loop::{EventLoop, ControlFlow};
-use winit::event::{Event, WindowEvent};
+use winit::event::{Event, WindowEvent, VirtualKeyCode, ElementState, KeyboardInput, DeviceId};
 
 
 
@@ -42,6 +42,7 @@ use std::time::Instant;
 
 
 fn main() {
+
     let mut manager = RawInputManager::new().unwrap();
     manager.register_devices(DeviceType::Joysticks(XInputInclude::True));
     let required_extensions = vulkano_win::required_extensions();
@@ -108,27 +109,50 @@ fn main() {
     let rotation_start = Instant::now();
     let mut x77 : f64 = 1.0;
 
-
-
     event_loop.run(move |event, _, control_flow| {
         match event {
-            Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
-                *control_flow = ControlFlow::Exit;
+            Event::WindowEvent { event, .. } => match event {
+                WindowEvent::Resized(_) => {
+                    recreate_swapchain = true;
+                }
+                WindowEvent::CloseRequested => {
+                    *control_flow = ControlFlow::Exit;
+                }
+                WindowEvent::KeyboardInput {
+                    input:
+                        KeyboardInput {
+                            virtual_keycode: Some(virtual_code),
+                            state: ElementState::Pressed,
+                            ..
+                        },
+                    ..
+                } => match virtual_code {
+                    VirtualKeyCode::Escape => {
+                        println!("Escape key pressed.");
+                    },
+                    _ => {
+                        println!("Some other key pressed?");
+                    }
+                },
+                _ => ()
             },
-            Event::WindowEvent { event: WindowEvent::Resized(_), .. } => {
-                recreate_swapchain = true;
-            },
+
+
+
+            // Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
+            //     *control_flow = ControlFlow::Exit;
+            // },
+            // Event::WindowEvent { event: WindowEvent::Resized(_), .. } => {
+            //     recreate_swapchain = true;
+            // },
             Event::RedrawEventsCleared => {
                 previous_frame_end.as_mut().unwrap().cleanup_finished();
                 let mut x_input: f64 = 0.0;
                 let mut y_input: f64 = 0.0;
                 if let Some(event) = manager.get_event(){
                     match &event{
-                        RawEvent::KeyboardEvent(_,  KeyId::Escape, State::Pressed)
-                            => println!("keyboard event"),
                         RawEvent::JoystickAxisEvent(_, axe, foo)
                             => {
-                                // println!("12312323 {:?} {:?}", axe, foo);
                                 match *axe {
                                     Axis::X => {
                                         x_input = *foo;
