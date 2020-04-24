@@ -28,8 +28,6 @@ use winit::window::{WindowBuilder, Window};
 use winit::event_loop::{EventLoop, ControlFlow};
 use winit::event::{Event, WindowEvent, VirtualKeyCode, ElementState, KeyboardInput, DeviceId};
 
-
-
 use tobj;
 use cgmath::{Matrix3, Matrix4, Point3, Vector3, Rad};
 
@@ -39,7 +37,6 @@ use std::iter;
 use std::fs::File;
 use std::io::prelude::*;
 use std::time::Instant;
-
 
 fn main() {
 
@@ -73,12 +70,10 @@ fn main() {
     let mashes : Vec<Package> = build_lear(device.clone());
     let (vertex_buffer_terrain, normals_buffer_terrain, index_buffer_terrain) = build_terrain(device.clone());
 
-
     let uniform_buffer = CpuBufferPool::<vs::ty::Data>::new(device.clone(), BufferUsage::all());
     let vs = vs::Shader::load(device.clone()).unwrap();
     let vsTerrain = vsTerrain::Shader::load(device.clone()).unwrap();
     let fs = fs::Shader::load(device.clone()).unwrap();
-
 
     let x700 = vulkano::single_pass_renderpass!(device.clone(),
         attachments: {
@@ -137,14 +132,6 @@ fn main() {
                 _ => ()
             },
 
-
-
-            // Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
-            //     *control_flow = ControlFlow::Exit;
-            // },
-            // Event::WindowEvent { event: WindowEvent::Resized(_), .. } => {
-            //     recreate_swapchain = true;
-            // },
             Event::RedrawEventsCleared => {
                 previous_frame_end.as_mut().unwrap().cleanup_finished();
                 let mut x_input: f64 = 0.0;
@@ -332,8 +319,6 @@ fn window_size_dependent_setup(
 
     (pipeline, framebuffers, pipelineTerrain)
 }
-
-
 
 
 mod vsTerrain {
