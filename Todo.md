@@ -21,9 +21,11 @@
 
 - [x] joystick input mapped to primitive-axis control of aircraft model
 
-- [ ] improve terrain mesh generation algo, maybe offload this to another process, maybe even a network linked process rather than a process that will die with the main process, would save iteration time on reloads
+- [ ] integrate live shader reload from Studio into main development space Peregrine.  Studio will probably remain relevant as a testbed for new dev-tools, or something ancillary like that.
 
-- raytracing: research and start implementing a raytracing render pipeline. 
+- [ ] improve terrain mesh generation algo, offload this to another process, a network linked process rather than a process that will die with the main process, would save iteration time on reloads.
+
+- raytracing: research and start implementing a raytracing render pipeline.
 
 
 

@@ -89,10 +89,30 @@ pub struct Package {
     pub index_buffer: std::sync::Arc<CpuAccessibleBuffer::<[u32]>>
 }
 
+
+
+// April-28: Can we start one process that loads terrain, keep it
+// alive while we restart another compiled process separate, then share
+// data on the heap via an <Arc> ?
+// That would be a great way to have terrain already loaded and waiting.
+// Not such a bad development line, as although it doesn't directly address
+// the simulation requirements, it does support development velocity, so offers
+// perhaps the best long-term utility on immediate work.
+// Anyways there is something slighty amiss in our terrain generation algo, because
+// there are degenerate triangles.  
+
+// I don't want the terrain build process to bottleneck the main development process, as it takes quite a bit of time.
+// Maybe this could be a separate process, which sends the data over networked.
+// Begs the question of how to transmit the data over network.  Loading the data
+// into a CpuAccessibleBuffer is a non-starter as those are not available to transfer between processes, or they may be?  Can two applications share a Vulkan instance in some way I wonder.  This could be a research angle.
+// Also, Todo, there were some degenerate triangles in this generated mesh, will need to fix the algo.
 pub fn build_terrain(device: Arc<Device>) -> (Arc<CpuAccessibleBuffer::<[Vertex]>>, Arc<CpuAccessibleBuffer::<[Normal]>>, Arc<CpuAccessibleBuffer::<[u32]>>) {
     let mut terrain_f = std::fs::File::open("models_materials/terrain_mesh_003.txt").unwrap();
     let mut terrain_buffer = String::new();
     terrain_f.read_to_string(&mut terrain_buffer).unwrap();
+
+    // The poor naming was a stub to move quickly, can refactor
+    // with integration of some of these lines, and improve naming.
     let x99 : Vec<&str> = terrain_buffer.split("Vertices:").collect();
     let x100 = String::from(x99[1]);
     let x101 : Vec<&str> = x100.split("Indices:").collect();
@@ -116,8 +136,11 @@ pub fn build_terrain(device: Arc<Device>) -> (Arc<CpuAccessibleBuffer::<[Vertex]
     }
 
     let normals_buffer_terrain = CpuAccessibleBuffer::from_iter(device.clone(), BufferUsage::all(), false, x300.iter().cloned()).unwrap();
+
     let x161 = process_str_ints(&x160);
+
     let index_buffer_terrain = CpuAccessibleBuffer::from_iter(device.clone(), BufferUsage::all(), false, x161.iter().cloned()).unwrap();
+
     (vertex_buffer_terrain, normals_buffer_terrain, index_buffer_terrain)
 }
 

@@ -381,6 +381,11 @@ fn vulkan_main() -> (winit::event_loop::EventLoopProxy<CustomEvent>, impl FnOnce
     let mut framebuffers = window_size_dependent_setup(&images, render_pass.clone(), &mut dynamic_state);
     let mut previous_frame_end = Some(Box::new(sync::now(device.clone())) as Box<dyn GpuFuture>);
 
+
+    // What should I name this closure?  Or is there a better implementation pattern than the one
+    // I used ?  Not sure about the performance hit of this pattern in Rust or generally, but it's
+    // just being used here as part of development infrastructure -- here we're using it to enable
+    // live-reload of shaders.
     let cloj = move || {
         event_loop.run(move |event, _, control_flow| {
             match event {
