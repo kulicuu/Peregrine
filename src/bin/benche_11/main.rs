@@ -17,6 +17,57 @@
 
 
 
+
+
+// https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use vulkano::instance::{Instance, PhysicalDevice};
+use vulkano::instance::InstanceExtensions;
+
+use vulkano::device::{Device, DeviceExtensions, Features};
+
+
+
 fn main() {
     println!("benche 11");
+
+
+    let instance = Instance::new(None, &InstanceExtensions::none(), None)
+    .expect("failed to create instance");
+
+
+    let physical = PhysicalDevice::enumerate(&instance).next()
+    .expect("no device available");
+
+
+    let queue_family = physical.queue_families()
+    .find(|&q| {
+        println!("q: {:?}", q);
+        q.supports_graphics()
+    })
+    .expect("couldn't find a grahpical queue family");
+
+
+    let (device, mut queues) = {
+        Device::new(physical, &Features::none(), &DeviceExtensions::none(),
+        [(queue_family, 0.5)].iter().cloned()).expect("failed to create device")
+    };
+
+    let queue = queues.next().unwrap();
+
 }

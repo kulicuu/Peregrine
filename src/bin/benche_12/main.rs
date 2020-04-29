@@ -1,5 +1,13 @@
 
 
+// So in this one we'll be studying the Ash wrapper over Vulkan instead of Vulkano.
+// https://github.com/MaikKlein/ash
+
+
+// Do something in same code-set with Vk-Sys.
+
+
+extern crate ash;
 
 
 
@@ -7,5 +15,6 @@
 
 fn main() {
 
-    println!("Bench 12: Terrain client.  Connect to terrain server, ask for heap reference, get data, render the data.")
+
+
 }

@@ -42,6 +42,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cff77d8686867eceff3105329d4698d96c2391c176d5d03adc90c7389162b5b8"
 
 [[package]]
+name = "ash"
+version = "0.30.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "69daec0742947f33a85931fa3cb0ce5f07929159dcbd1f0cbb5b2912e2978509"
+dependencies = [
+ "libloading",
+]
+
+[[package]]
 name = "autocfg"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1000,6 +1009,7 @@ checksum = "d4fd5641d01c8f18a23da7b6fe29298ff4b55afcccdf78973b24cf3175fee32e"
 name = "peregrine"
 version = "0.0.0"
 dependencies = [
+ "ash",
  "cgmath",
  "gilrs",
  "image",
@@ -1011,6 +1021,7 @@ dependencies = [
  "srtm",
  "time",
  "tobj",
+ "vk-sys 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "vulkano",
  "vulkano-shaders",
  "vulkano-win",
@@ -1556,6 +1567,12 @@ version = "0.5.1"
 source = "git+https://github.com/vulkano-rs/vulkano.git?rev=master#b245e6c4dce02a591ac028aef094b579e15d5d02"
 
 [[package]]
+name = "vk-sys"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c24c107c0402856ad434d2dc0f3dbdc68c9e170e8bab0f27aa82a282d234d57c"
+
+[[package]]
 name = "void"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1572,7 +1589,7 @@ dependencies = [
  "lazy_static",
  "shared_library",
  "smallvec",
- "vk-sys",
+ "vk-sys 0.5.1 (git+https://github.com/vulkano-rs/vulkano.git?rev=master)",
 ]
 
 [[package]]
