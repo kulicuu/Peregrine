@@ -35,6 +35,8 @@
 - [ ] Study this framework documentation https://github.com/MaikKlein/ash
  in order to get another perspective on Vulkan, if not to abandon Vulkano.  Also, because, we'll need to use this and/or Vk-Sys to implement the Vk-external-memory feature and get a multi-process approach to the development structure, and possibly the end-user-program. Some computation could be carried out over a network for example.
 
+- [ ] Kind of unfortunately for time-scale, but probably worth it in the end, is to rewrite the present implementations and capabilities into Ash.  This will give a better perspective into Vulkan, having both wrappers to contrast.  Also getting the sense that Vulkano insulates the developer from Vulkan too much, without a documented portal to a true API -- which I'm guessing Vk-Sys can provide, but not documented.  Ash seems to lack documentation, but seems to be built in a way where one should only need to consult Vulkan docs for the most part.  A Vulkano rep on Gitter alluded that Vulkano can be used in a way with side-by-side raw Vulkan bindings, but this is nowhere documented that I know of.
+    - [ ] send in a query on Gitter if not an issue on Github, requesting documentation on accessing Vulkan API directly.  It may turn out to be necessary to implement some of Vulkano's safety mechanisms directly rather than use the framework, ... who knows, will prototype and research this.  
 
 
 ### Research

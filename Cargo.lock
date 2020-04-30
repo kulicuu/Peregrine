@@ -1025,6 +1025,7 @@ dependencies = [
  "vulkano",
  "vulkano-shaders",
  "vulkano-win",
+ "winapi 0.3.8",
  "winit",
 ]
 
