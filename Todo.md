@@ -28,6 +28,10 @@
     https://www.reddit.com/r/rust_gamedev/comments/9ijsrs/raw_vulkan_bindings/
     Might need to switch some usage through Ash.
 
+    **Check out**: https://github.com/Ralith/lahar
+
+    _the above is described on the Ash readme as having "tools for asynchronously uploading data to a Vulkan device" ._
+
 - [ ]  Port some usage from Vulkano to Ash and Vk-Sys, as per the research angle alluded in the Reddit thread above.  This will be necessary first of all for the implementation of the terrain server which decouples terrain memory management from the main development program code being iterated over.  Unless you are developing terrain parsing programs, which we are, in which case this terrain-server process becomes with a client/head a terrain-development studio.  instead of live shader reload, it will be based around importing 3dMax files or terrain hgt files.  There is an associated research angle here, which is can we serialize to disk in a format easier to make volatile in buffer than e.g. the original hgt file ?  The way we did the terrain parse in our POC program was partly dependent on a Vulkano implementation detail.  Will need to generalize.
 
 - [ ] raytracing: research and start implementing a raytracing render pipeline.
