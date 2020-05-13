@@ -12,7 +12,7 @@ vulkano = { git = "https://github.com/vulkano-rs/vulkano.git", rev = "master" }
 vulkano-win = { git = "https://github.com/vulkano-rs/vulkano.git", rev = "master" }
 vulkano-shaders = { git = "https://github.com/vulkano-rs/vulkano.git", rev = "master" }
 
-ash = "0.30.0"
+ash = "0.31.0"
 cgmath = "0.17"
 gilrs = "0.7.2"
 image = "0.22"
@@ -27,5 +27,5 @@ srtm = "0.1.1"
 shaderc = "0.6.2"
 notify = "4.0.15"
 vk-sys = "0.5.1"
-winit = "0.22"
+winit = "0.22.1"
 winapi = "0.3.8"
